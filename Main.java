@@ -67,7 +67,7 @@ public class Main {
         }
 */
         else if ((indexMoney > guard && guard > thief) || (indexMoney < guard && guard < thief)) {
-            System.out.println("safe");
+            System.out.println("quiet");
         } else {
             System.out.println("ALARM");
         }
