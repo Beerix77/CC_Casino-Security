@@ -10,9 +10,9 @@ public class Main {
 
         // map layouts for testing
         //String mapLayout = "xxxxxxxxxGxxxx$xxxT";
-        String mapLayout = "xxxxxTxxxxGxxxxxxxx$xx";
+        //String mapLayout = "xxxxxTxxxxGxxxxxxxx$xx";
         //String mapLayout = "xxxxGxxxxTxxx$x";
-        //String mapLayout = "xxxxx$xxxxGxxxxxxxTxx";
+        String mapLayout = "$xxxxxxxxxGxxxxxxxTxx";
 
         // convert map layout to Array and locate index of $
         String[] arrayMap = mapLayout.split("");
@@ -21,7 +21,10 @@ public class Main {
 
         // TODO: add condition for: Multiple $, T, G present or missing
 
-        int indexMoney = 0;
+
+
+
+        int indexMoney = -1;
         for (int i = 0; i <= arrayMap.length - 1; i++) {
             if (arrayMap[i].equals("$")) {
                 indexMoney = i;
@@ -30,8 +33,9 @@ public class Main {
 
         // searching for (T)hief and (G)uard index locations to LEFT of $ index. G index must be > T index && < $ index.
         //System.out.println(indexMoney);
-        int guard = 0;
-        int thief = 0;
+        int guard = -1;
+        int thief = -1;
+
         for (int i = indexMoney - 1; i >= 0; i--) {
             if (arrayMap[i].equals("T")) {
                 thief = i;
@@ -39,6 +43,19 @@ public class Main {
                 guard = i;
             }
         }
+
+        // searching for (T)hief and (G)uard index locations to RIGHT of $ index.
+        for (int i = indexMoney + 1; i <= arrayMap.length-1; i++) {
+            if (arrayMap[i].equals("T")) {
+                thief = i;
+            } else if (arrayMap[i].equals("G")) {
+                guard = i;
+            }
+        }
+        if (indexMoney == -1 || guard == -1 || thief == -1){
+            System.out.println("ERROR. incorrect String map structure.");
+        }
+
         System.out.println(mapLayout);
         System.out.println("$ position: " + indexMoney);
         System.out.println("Thief position: " + thief);
